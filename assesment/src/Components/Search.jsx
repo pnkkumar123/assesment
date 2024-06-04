@@ -7,6 +7,13 @@ function Search() {
     const [searchTerm,setSearchTerm] = useState('harryPotter'); 
     const [loading,setLoading]=useState(false);
     const [error,setError] = useState('');
+//    function to add a book to the shelf
+const addToShelf = (book)=>{
+    const shelf = JSON.parse(localStorage.getItem('myShelf')) || [];
+    shelf.push(book);
+    localStorage.setItem('myShelf',JSON.stringify(shelf));
+    alert('Book Added to Your shelf');
+};
     // getting data from api
     const LibraryData = async()=>{
         setLoading(true)
@@ -38,7 +45,7 @@ function Search() {
     <Wrapper>
         <div className="input">
             <input onChange={handleInputChange} type="text" name="search" placeholder='Search Book Here' />
-              <NavLink to='/myshelf'> <button style={{backgroundColor:'green',color:'white',borderRadius:'10px'}}>MY BookShelf</button></NavLink>
+              <NavLink to='/myshelf'> <button className='shelf-button'>MY BookShelf</button></NavLink>
         </div>
         <div className="display">
             {
@@ -52,7 +59,7 @@ function Search() {
                                 <span>Book Title : {title}</span>
                              <span className='author'>Author : {author_name}</span>
                              <span className='edition'>Edition : {edition_count}</span>
-                             <button className='button'>Add to MyBookShelf</button>
+                             <button onClick={()=>addToShelf(book)} className='button'>Add to MyBookShelf</button>
                             </div>
                         )
                     }))
@@ -82,6 +89,12 @@ border-radius:8px;
     display:flex;
     flex-direction:row;
    
+}
+.shelf-button {
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
 }
 input[type="text"]{
     width:100%;
@@ -157,7 +170,45 @@ input[type="text"]{
         transform: rotate(360deg);
     }
 }
+@media (max-width: 1024px) {
+    width: 90%;
 
+    input[type="text"] {
+        width: 70%;
+        padding: 8px;
+    }
+
+    .shelf-button {
+        padding: 8px;
+    }
+
+    .display {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    width: 100%;
+
+    input[type="text"] {
+        width: 80%;
+        padding: 8px;
+    }
+
+    .display {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        width: 100%;
+        height: auto;
+    }
+}
 
 `
 
