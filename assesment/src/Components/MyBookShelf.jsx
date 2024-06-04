@@ -79,5 +79,40 @@ const Wrapper = styled.div`
     font-size:14px;
     color:#666;
 }
+@media (max-width:1024){
+    .shelf{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+@media (max-width:768px){
+    .shelf {
+        grid-template-columns:1fr;
+    }
+    .back {
+        margin-right:0;
+    }
+}
+@media (max-width:480px){
+    width:100%;
+    padding:10px;
+    .title{
+        font-size:24px;
+    }
+    .book{
+        padding:5px;
+        font-size:14px;
+    }
+    .book .title{
+        padding:5px;
+        font-size:14px;
+    }
+    .book .title{
+        font-size:16px;
+    }
+    .book .author,
+    .book .edition {
+        font-size:12px;
+    }
+}
 `;
 export default MyBookShelf;
